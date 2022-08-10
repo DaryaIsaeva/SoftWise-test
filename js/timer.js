@@ -1,12 +1,16 @@
-const timerContainer = document.querySelector('.utility__timer span')
+const addTimer = () => {
+    const $timerContainer = $('.utility__timer span')
 
-let seconds = 10;
-
-const tick = () => {
-    if (seconds > 0) {
-        --seconds;
+    let seconds = 10;
+    
+    const tick = () => {
+        if (seconds > 0) {
+            --seconds;
+        }
+        $timerContainer.text(seconds);
     }
-    timerContainer.textContent = `${seconds} seconds`;
+    
+    const timer = setInterval(tick, 1000);
 }
 
-const timer = setInterval(tick, 1000);
+export { addTimer };

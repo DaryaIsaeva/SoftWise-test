@@ -1,11 +1,12 @@
 const dateContainer = document.querySelector('.utility__date');
 
-const dayOfTheWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-const month = ['January', 'February', 'March', 'April', 'May', 'June', 'Jule', 'August', 'September', 'October', 'November', 'December'];
+const dayOfTheWeekEn = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const monthEn = ['January', 'February', 'March', 'April', 'May', 'June', 'Jule', 'August', 'September', 'October', 'November', 'December'];
 
-const currentDate = new Date;
+const dayOfTheWeekRu = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
+const monthRu = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
 
-const formatDate = (date) => {
+const formatDate = (date, dayOfTheWeek, month) => {
     const day = date.getDay();
 
     let dd = date.getDate();
@@ -18,6 +19,13 @@ const formatDate = (date) => {
     return dayOfTheWeek[day] + ', ' + dd + ' ' + month[mm - 1] + ', ' + yy;
 }
 
-const newDate = formatDate(currentDate);
-
-dateContainer.append(newDate);
+$(document).ready(() => {
+    if (location.href.match('/?lang=ru')) {
+        const currentDate = formatDate(new Date, dayOfTheWeekRu, monthRu);
+        dateContainer.textContent = '';
+        dateContainer.append(currentDate);
+    } else {
+        const currentDate = formatDate(new Date, dayOfTheWeekEn, monthEn);
+        dateContainer.append(currentDate);
+    }
+});
